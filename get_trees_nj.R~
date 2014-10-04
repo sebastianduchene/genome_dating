@@ -1,0 +1,4 @@
+
+tr_tag <- 'tr1'
+
+trees_names <- grep(paste0(tr_tag, '.+fasta'), dir(), value = T)
