@@ -7,6 +7,8 @@ Sebastian Duchene
 
 ## Simulate data with 5 topologies (gt) and 3 pacemakers (pm) for each topology
 
+In this simulation the number of genes is 510. Bootstrapping to find the optimal number of clusters from 2:50 is taking 24 seconds with 5 cores.
+
    - Can we recover the true number of gt clusters?
 
    Silhouette width plot
