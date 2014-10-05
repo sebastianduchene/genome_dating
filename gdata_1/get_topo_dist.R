@@ -27,7 +27,7 @@ get_topo_dist <- function(tree_list, tree_names){
 
 library(doParallel)
 
-cl <- makeCluster(5)
+cl <- makeCluster(10)
 registerDoParallel(cl)
 
 topo_dists_test <- foreach(i = 1:length(vector_names), .combine = cbind) %dopar% get_topo_dist(trees_tr, strsplit(vector_names[i], ' ')[[1]])
