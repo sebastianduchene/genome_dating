@@ -1,0 +1,32 @@
+library(cluster)
+library(ape)
+
+
+dat_raw <- as.matrix(read.table('topo_dist_mat.txt', head = T, as.is = T))
+
+dat_raw[upper.tri(dat_raw, diag = T)] <- 0
+
+dat_raw[1:ncol(dat_raw), 1:nrow(dat_raw)] <- as.numeric(dat_raw)
+
+dat_dist <- as.dist(dat_raw)
+
+mds_dat <- cmdscale(dat_dist, k = 2)
+
+library(rgl)
+
+
+clu1 <- pam(mds_dat, k = 5)
+
+plot(mds_dat, pch = 20, col = clu1$clustering)
+
+
+all_trees <- read.tree('nj_trees.trees')
+medoid_trees_1 <- all_trees$tr_1_pm_1_20.fasta
+medoid_trees_2 <- all_trees$tr_2_pm_3_30.fasta
+medoid_trees_3 <- all_trees$tr_3_pm_1_7.fasta
+medoid_trees_4 <- all_trees$tr_4_pm_3_6.fasta
+medoid_trees_5 <- all_trees$tr_5_pm_3_8.fasta
+
+true_trees <- read.tree('simtree1.tre')
+
+dist.topo

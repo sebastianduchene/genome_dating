@@ -1,0 +1,16 @@
+library(cluster)
+
+dat_raw <- as.matrix(read.table('topo_dist_mat.txt', head = T, as.is = T))
+
+dat_raw[upper.tri(dat_raw, diag = T)] <- 0
+
+dat_raw[1:ncol(dat_raw), 1:nrow(dat_raw)] <- as.numeric(dat_raw)
+
+dat_dist <- as.dist(dat_raw)
+
+mds_dat <- cmdscale(dat_dist, k = 3)
+
+library(rgl)
+
+plot3d(mds_dat)
+
