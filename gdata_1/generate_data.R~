@@ -40,7 +40,7 @@ var_temp <- 0
 
 #tree 1. Large wide cluster with slow pacemakers
       tree_temp <- trees_topo[[1]]
-      tree_temp$edge.length <- tree_temp$edge.length * pm1 / 2
+      tree_temp$edge.length <- tree_temp$edge.length * pm1 / 4
       for(k in 1:50){
       	    sim_temp_1 <- as.DNAbin(simSeq(tree_temp, l = 1000))
 	    write.dna(sim_temp_1, file = paste0('tr_', 1, '_pm_1_', k, '.fasta'), format = 'fasta', nbcol = -1, colsep = '')
@@ -51,7 +51,7 @@ var_temp <- 0
       }
 
       tree_temp <- trees_topo[[1]]
-      tree_temp$edge.length <- tree_temp$edge.length * pm2 / 1
+      tree_temp$edge.length <- tree_temp$edge.length * pm2 / 3
       for(k in 1:40){
       	    sim_temp_1 <- as.DNAbin(simSeq(tree_temp, l = 1000))
 	    write.dna(sim_temp_1, file = paste0('tr_', 1, '_pm_2_', k, '.fasta'), format = 'fasta', nbcol = -1, colsep = '')
@@ -62,7 +62,7 @@ var_temp <- 0
       }
 
       tree_temp <- trees_topo[[1]]
-      tree_temp$edge.length <- tree_temp$edge.length * pm3 * 2
+      tree_temp$edge.length <- tree_temp$edge.length * pm3 / 2
       for(k in 1:30){
       	    sim_temp_1 <- as.DNAbin(simSeq(tree_temp, l = 1000))
 	    write.dna(sim_temp_1, file = paste0('tr_', 1, '_pm_3_', k, '.fasta'), format = 'fasta', nbcol = -1, colsep = '')
@@ -74,7 +74,7 @@ var_temp <- 0
 
 #tree 2. Large narrow cluster with fast pacemakers
       tree_temp <- trees_topo[[2]]
-      tree_temp$edge.length <- tree_temp$edge.length * pm1  /  1.5
+      tree_temp$edge.length <- tree_temp$edge.length * pm1  /  3
       for(k in 1:40){
       	    sim_temp_1 <- as.DNAbin(simSeq(tree_temp, l = 1000))
 	    write.dna(sim_temp_1, file = paste0('tr_', 2, '_pm_1_', k, '.fasta'), format = 'fasta', nbcol = -1, colsep = '')
@@ -85,7 +85,7 @@ var_temp <- 0
       }
 
       tree_temp <- trees_topo[[2]]
-      tree_temp$edge.length <- tree_temp$edge.length * pm2  / 1.5
+      tree_temp$edge.length <- tree_temp$edge.length * pm2  / 3
       for(k in 1:30){
       	    sim_temp_1 <- as.DNAbin(simSeq(tree_temp, l = 1000))
 	    write.dna(sim_temp_1, file = paste0('tr_', 2, '_pm_2_', k, '.fasta'), format = 'fasta', nbcol = -1, colsep = '')
@@ -96,7 +96,7 @@ var_temp <- 0
       }
 
       tree_temp <- trees_topo[[2]]
-      tree_temp$edge.length <- tree_temp$edge.length * pm3 * 1.5
+      tree_temp$edge.length <- tree_temp$edge.length * pm3 / 3
       for(k in 1:30){
       	    sim_temp_1 <- as.DNAbin(simSeq(tree_temp, l = 1000))
 	    write.dna(sim_temp_1, file = paste0('tr_', 2, '_pm_3_', k, '.fasta'), format = 'fasta', nbcol = -1, colsep = '')
@@ -107,10 +107,10 @@ var_temp <- 0
 	}
 
 
-if(F){
+
 #tree 3. Large narrow cluster with fast pacemakers
       tree_temp <- trees_topo[[3]]
-      tree_temp$edge.length <- tree_temp$edge.length * pm1  /  1.5
+      tree_temp$edge.length <- tree_temp$edge.length * pm1  /  3
       for(k in 1:40){
       	    sim_temp_1 <- as.DNAbin(simSeq(tree_temp, l = 1000))
 	    write.dna(sim_temp_1, file = paste0('tr_', 3, '_pm_1_', k, '.fasta'), format = 'fasta', nbcol = -1, colsep = '')
@@ -121,7 +121,7 @@ if(F){
       }
 
       tree_temp <- trees_topo[[3]]
-      tree_temp$edge.length <- tree_temp$edge.length * pm2  / 1.5
+      tree_temp$edge.length <- tree_temp$edge.length * pm2  / 3
       for(k in 1:30){
       	    sim_temp_1 <- as.DNAbin(simSeq(tree_temp, l = 1000))
 	    write.dna(sim_temp_1, file = paste0('tr_', 3, '_pm_2_', k, '.fasta'), format = 'fasta', nbcol = -1, colsep = '')
@@ -132,7 +132,7 @@ if(F){
       }
 
       tree_temp <- trees_topo[[3]]
-      tree_temp$edge.length <- tree_temp$edge.length * pm3 * 3
+      tree_temp$edge.length <- tree_temp$edge.length * pm3 / 3
       for(k in 1:30){
       	    sim_temp_1 <- as.DNAbin(simSeq(tree_temp, l = 1000))
 	    write.dna(sim_temp_1, file = paste0('tr_', 3, '_pm_3_', k, '.fasta'), format = 'fasta', nbcol = -1, colsep = '')
@@ -141,9 +141,9 @@ if(F){
 	    var_sites_mat[var_temp, ] <- c(paste0('tr_', 3, '_pm_3_', k, '.fasta'), length(seg.sites(sim_temp_1)))
 
 	}
-}
 
-if(F){
+
+
 #tree 4. Large narrow cluster with fast pacemakers
       tree_temp <- trees_topo[[4]]
       tree_temp$edge.length <- tree_temp$edge.length * pm1  /  3
@@ -177,7 +177,7 @@ if(F){
 	    var_sites_mat[var_temp, ] <- c(paste0('tr_', 4, '_pm_3_', k, '.fasta'), length(seg.sites(sim_temp_1)))
 
 	}
-}
+
 
 
 
