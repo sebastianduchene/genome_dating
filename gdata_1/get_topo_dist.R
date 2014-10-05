@@ -30,14 +30,16 @@ library(doParallel)
 cl <- makeCluster(5)
 registerDoParallel(cl)
 
-topo_dists_test <- foreach(i = 1:150, .combine = cbind) %dopar% get_topo_dist(trees_tr, strsplit(vector_names[i], ' ')[[1]])
-colnames(topo_dists_test) <- vector_names[1:150]
+topo_dists_test <- foreach(i = 1:length(vector_names), .combine = cbind) %dopar% get_topo_dist(trees_tr, strsplit(vector_names[i], ' ')[[1]])
+colnames(topo_dists_test) <- vector_names
 stopCluster(cl)
 
-
-trees_run <- which(lower.tri(topo_mat), arr.ind = T)[1:150, ]
+trees_run <- which(lower.tri(topo_mat), arr.ind = T)
 
 for(i in 1:nrow(trees_run)){
  topo_mat[trees_run[i, 1], trees_run[i, 2]] <- topo_dists_test[i]     
- print(topo_mat[trees_run[i, 1], ])
+# print(topo_mat[trees_run[i, 1], 1])
 }
+
+write.table(topo_mat, file = 'topo_dist_mat.txt', row.names = T, col.names = T)
+

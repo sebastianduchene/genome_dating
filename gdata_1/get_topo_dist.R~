@@ -31,7 +31,7 @@ cl <- makeCluster(5)
 registerDoParallel(cl)
 
 topo_dists_test <- foreach(i = 1:150, .combine = cbind) %dopar% get_topo_dist(trees_tr, strsplit(vector_names[i], ' ')[[1]])
-colnames(topo_dists_test) <- vector_names[1:100]
+colnames(topo_dists_test) <- vector_names[1:150]
 stopCluster(cl)
 
 
