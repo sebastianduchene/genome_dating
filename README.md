@@ -40,17 +40,14 @@ The true gt is contained in the gt clusters for two of the clusters. In the othe
 
 The clusters are defined as follows:
 
--      size max_diss   av_diss diameter separation
-
-- [1,]  120 3.901706 1.4369595 7.531254   5.258430
-
-- [2,]  100 5.370699 2.0334611 8.372119   2.381935
-
-- [3,]  100 5.345461 1.6231791 9.387836   2.381935
-
-- [4,]  100 2.490626 0.8647195 4.687670   5.876823
-
-- [5,]   90 2.536509 0.5860012 4.774257   7.484193
+```   
+      size max_diss   av_diss diameter separation
+ [1,]  120 3.901706 1.4369595 7.531254   5.258430
+ [2,]  100 5.370699 2.0334611 8.372119   2.381935
+ [3,]  100 5.345461 1.6231791 9.387836   2.381935
+ [4,]  100 2.490626 0.8647195 4.687670   5.876823
+ [5,]   90 2.536509 0.5860012 4.774257   7.484193
+```
 
 The largest cluster is #1, with 120 genes, but it is also the second widest. This implies that there is considerable variation in the gts for this cluster. The narrowest cluster is #5, but it is also the smallers, with 90 genes. Two reasonable strategies for genome dating are:
 
