@@ -7,6 +7,8 @@ Sebastian Duchene
 
 ## Simulate data with 5 topologies (gt) and 3 pacemakers (pm) for each topology
 
+In this simulation the number of genes is 510. Bootstrapping to find the optimal number of clusters from 2:50 is taking 24 seconds with 5 cores.
+
    - Can we recover the true number of gt clusters?
 
    Silhouette width plot
@@ -14,10 +16,16 @@ Sebastian Duchene
 
    **Fig 1. Average silhouette width for numbers of gt clusters**
 
+ According to the silhouette with, the number of gts is 5, corresponding to the number of gts used to generate the data.
 
    ![fig2](https://raw.githubusercontent.com/sebastianduchene/genome_dating/master/gdata_1/topology_clusters.png)
 
+The clustering algorithm classifies the trees correctly. (this is in the mds_clustering script). 
+
    **Fig 2. MDS of gt clusters**
+
+The distance between the mediods and the true gts is:
+
 
    ** To do** 
 
