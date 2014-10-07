@@ -26,9 +26,9 @@ The clustering algorithm classifies the trees correctly. (this is in the mds_clu
 
 The distance between the mediods and the true gts is:
 
-- gt1 vs. tr_1_pm_1_20.fasta = 10
+- gt1 vs. tr_1_pm_1_20.fasta = 0
 
-- gt2 vs. tr_2_pm_3_20.fasta = 10
+- gt2 vs. tr_2_pm_3_20.fasta = 0
 
 - gt3 vs. tr_3_pm_1_20.fasta = 6
 
@@ -36,7 +36,7 @@ The distance between the mediods and the true gts is:
 
 - gt5 vs. tr_5_pm_3_20.fasta = 0
 
-The true gt is contained in the gt clusters for two of the clusters. In the others, the distance is not very large, at 10 and 6, out of a maximum of 34. One alternative is to concatenate the genes from the clusters to estimate the gt. 
+The true gt is contained in the gt clusters for all of the clusters. This will not always be the case. 
 
 The clusters are defined as follows:
 
@@ -60,8 +60,11 @@ The largest cluster is #1, with 120 genes, but it is also the second widest. Thi
    **Fig3. Example of simulated gts and medoid gts. Row 1 is cluster 1, and Row 2 is for cluster 2. Column 1 is for the simulated (true) gts and column 2 is the medoid estimated with nj.**
 
 
-   ** To do** 
+   - We can recover the true trees by concatenating the cluster data, or by using the medoid. However concatenating is more reliable. 
 
-   Does the medoid correspond to the true tree? What about the concatenated data?
+   **To do**
    
+   - Select candidate clusters for genome dating
+   
+   - Run clockstar for simulated data on the largest cluster and hte narowest    
    Plot trees and tree distances
