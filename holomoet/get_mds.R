@@ -39,7 +39,7 @@ for(i in 1:50){
 
 stopCluster(cl)
 }
-dev.new()
+par(mfrow = c(2, 1))
 plot(2:50, as.numeric(true_dat_clus), type = 'l', lwd = 2, col = 'red', ylim = c(0.3, 1), ylab = 'Average silhouette width', xlab = 'Number of topology clusters')
 for(i in 1:length(boot_dat_clus)){
 #      points(jitter(2:50), as.numeric(boot_dat_clus[[i]]), pch = 20, col = rgb(0, 0, 0.5, 0.2))
@@ -54,14 +54,10 @@ clu1 <- pam(mds_dat, k = 5)
 
 plot(mds_dat, pch = 20, col = clu1$clustering, xlab = 'MDS 1', ylab = 'MDS 2')
 
+write.table(t(t(clu1$clustering)), file = 'clust_k_5.txt', row.names = T)
+write.table(clu1$clusinfo, file = 'clust_info_k_5.txt', row.names = F)
 
-all_trees <- read.tree('nj_trees.trees')
+all_trees <- read.tree('15_taxa_uniq.tree')
 
 medoid_trees <- all_trees[clu1$id.med]
 
-true_trees <- read.tree('simtree1.tre')
-
-t_dists <- vector()
-for(i in 1:length(medoid_trees)){
-      t_dists[i] <- dist.topo(medoid_trees[[i]], true_trees[[i]])
-}

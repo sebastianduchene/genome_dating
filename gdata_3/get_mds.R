@@ -54,6 +54,8 @@ clu1 <- pam(mds_dat, k = 5)
 
 plot(mds_dat, pch = 20, col = clu1$clustering, xlab = 'MDS 1', ylab = 'MDS 2')
 
+write.table(t(t(clu1$clustering)), file = 'clust_k_5.txt', row.names = T)
+write.table(clu1$clusinfo, file = 'clust_info_k_5.txt', row.names = F)
 
 all_trees <- read.tree('nj_trees.trees')
 
