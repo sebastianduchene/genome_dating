@@ -5,6 +5,19 @@ Updated on: Oct 5 2014
 Sebastian Duchene
 
 
+
+The steps are:
+estimate nj trees
+get dist.topo matrix
+get mds of dist.topo with two dimensions
+choose clusers, concatenate data and estimate the gene trees
+optimise branch lengths on gene trees for each of the chosen clusters
+estimate sbsdmin for each cluster
+choose clusters
+
+This section needs to be updated with the data in gdata4
+
+
 ## Simulate data with 5 topologies (gt) and 3 pacemakers (pm) for each topology
 
 In this simulation the number of genes is 510. Bootstrapping to find the optimal number of clusters from 2:50 is taking 24 seconds with 5 cores.
