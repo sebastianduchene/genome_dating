@@ -9,6 +9,10 @@ dat_raw[1:ncol(dat_raw), 1:nrow(dat_raw)] <- as.numeric(dat_raw)
 dat_dist <- as.dist(dat_raw)
 mds_dat <- cmdscale(dat_dist, k = 2)
 
+write.table(mds_dat, file = 'mds_topo.txt', row.names = T)
+
+stop('getting mds')
+
 ### functions
 
 clus_fun <- function(x, kmax) sapply(2:(kmax), function(i) clara(x, k = i)$silinfo$avg.width )
