@@ -20,7 +20,7 @@ set.seed(123456)
 pm1 <- rlnorm(38, -6.9, 0.2)
 
 set.seed(654421)
-pm2 <- rlnorm(38, -6.9, 0.2)
+pm <- rlnorm(38, -6.9, 0.2)
 
 set.seed(222222)
 pm3 <- rlnorm(38, -6.9, 0.2)
