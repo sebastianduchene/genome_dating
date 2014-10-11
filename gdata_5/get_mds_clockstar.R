@@ -55,7 +55,7 @@ for(i in 1:length(boot_dat_clus)){
 
 
 
-clu1 <- pam(mds_dat, k = 3)
+clu1 <- pam(mds_dat, k = 4)
 
 plot(mds_dat, pch = 20, col = clu1$clustering, xlab = 'MDS 1', ylab = 'MDS 2')
 

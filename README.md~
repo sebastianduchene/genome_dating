@@ -7,13 +7,20 @@ Sebastian Duchene
 
 
 The steps are:
-estimate nj trees
-get dist.topo matrix
-get mds of dist.topo with two dimensions
-choose clusers, concatenate data and estimate the gene trees
-optimise branch lengths on gene trees for each of the chosen clusters
-estimate sbsdmin for each cluster
-choose clusters
+
+- estimate nj trees
+
+- get dist.topo matrix
+
+- get mds of dist.topo with two dimensions
+
+- choose clusers, concatenate data and estimate the gene trees
+
+- optimise branch lengths on gene trees for each of the chosen clusters
+
+- estimate sbsdmin for each cluster
+
+- choose clusters
 
 This section needs to be updated with the data in gdata4
 

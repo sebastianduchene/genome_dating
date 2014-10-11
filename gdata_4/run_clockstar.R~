@@ -2,7 +2,6 @@ library(ape)
 
 
 c1_trees <- read.tree('c1_optim_trees.trees')
-c5_trees <- read.tree('c5_optim_trees.trees')
 
 sbsdmin_mat <- function(trees, n_clust){
 require(doParallel)

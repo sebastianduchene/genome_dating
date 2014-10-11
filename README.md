@@ -83,8 +83,5 @@ The largest cluster is #1, with 120 genes, but it is also the second widest. Thi
    - We can recover the true trees by concatenating the cluster data, or by using the medoid. However concatenating is more reliable. 
 
    **To do**
-   
-   - Select candidate clusters for genome dating
-   
-   - Run clockstar for simulated data on the largest cluster and hte narowest    
-   Plot trees and tree distances
+      
+   - Run clockstar for random data sets with 50 genes
