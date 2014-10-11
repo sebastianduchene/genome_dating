@@ -1,7 +1,11 @@
 library(ape)
 
 
+<<<<<<< HEAD
+c1_trees <- read.tree('c1_optim_trees.trees')
+=======
 c1_trees <- read.tree('topo_clus_1_gts.trees')
+>>>>>>> 3267e3604a56094491099b7f02411c212f75a6de
 
 sbsdmin_mat <- function(trees, n_clust){
 require(doParallel)
@@ -93,5 +97,10 @@ return(sbsd_mat)
 
 sbsd_1 <- sbsdmin_mat(c1_trees, 10)
 write.table(sbsd_1, file = 'sbsd_c1.txt', row.names = T, col.names = T)
+<<<<<<< HEAD
+sbsd_5 <- sbsdmin_mat(c5_trees, 10)
+write.table(sbsd_5, file = 'sbsd_c5.txt', row.names = T, col.names = T)
+=======
 #sbsd_5 <- sbsdmin_mat(c5_trees, 10)
 #write.table(sbsd_5, file = 'sbsd_c5.txt', row.names = T, col.names = T)
+>>>>>>> 3267e3604a56094491099b7f02411c212f75a6de
