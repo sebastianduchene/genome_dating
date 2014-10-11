@@ -1,8 +1,7 @@
 library(ape)
 
 
-c1_trees <- read.tree('c1_optim_trees.trees')
-c5_trees <- read.tree('c5_optim_trees.trees')
+c1_trees <- read.tree('test_trees.trees')
 
 sbsdmin_mat <- function(trees, n_clust){
 require(doParallel)
@@ -92,7 +91,7 @@ return(sbsd_mat)
 
 }
 
-sbsd_1 <- sbsdmin_mat(c1_trees, 10)
+sbsd_1 <- sbsdmin_mat(c1_trees, 5)
 write.table(sbsd_1, file = 'sbsd_c1.txt', row.names = T, col.names = T)
-sbsd_5 <- sbsdmin_mat(c5_trees, 10)
-write.table(sbsd_5, file = 'sbsd_c5.txt', row.names = T, col.names = T)
+#sbsd_5 <- sbsdmin_mat(c5_trees, 10)
+#write.table(sbsd_5, file = 'sbsd_c5.txt', row.names = T, col.names = T)
