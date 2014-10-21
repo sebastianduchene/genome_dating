@@ -70,11 +70,11 @@ optim_clusters_topo <- function(topo_mat_file, out_mds_file = 'mds_topo.txt', n_
 }
 
 #to test:
-test_1 <- optim_clusters_topo('out_test_1.txt', n_clusters = 5
+#test_1 <- optim_clusters_topo('out_test_1.txt', n_clusters = 5
 , b_reps = 50, kmax = 98)
 
-plot(2:98, test_1[[1]], type = 'l', ylim = c(0.2, 0.7))
-for(i in 1:length(test_1[[2]])){
-  points(2:98, test_1[[2]][[i]], col = rgb(0, 0, 0.5, 0.3))
-}
+#plot(2:98, test_1[[1]], type = 'l', ylim = c(0.2, 0.7))
+#for(i in 1:length(test_1[[2]])){
+#  points(2:98, test_1[[2]][[i]], col = rgb(0, 0, 0.5, 0.3))
+#}
 
