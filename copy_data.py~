@@ -1,0 +1,3 @@
+import re, os, subprocess
+
+trees1 = os.listdir('../gdata_5')
