@@ -1,0 +1,39 @@
+
+library(phangorn)
+
+
+cluster_id <- read.table('clust_k_5.txt', head = T, as.is = T)
+
+c1_files <- rownames(cluster_id)[cluster_id == 1]
+
+c1_gt <- read.tree('cluster_1_gt.tree')
+c1_trees <- list()
+for(i in 1:length(c1_files)){
+      print(paste('I am optimising', c1_files[i]))
+      file_temp <- phyDat(read.dna(c1_files[i], format = 'fasta'))
+      c1_trees[[i]] <- optim.pml(pml(tree = c1_gt, data = file_temp), optNni = F, optEdge = T)$tree
+}
+
+names(c1_trees) <- c1_files
+class(c1_trees) <- 'multiPhylo'
+
+write.tree(c1_trees, file = 'c1_optim_trees.trees', tree.names = T)
+
+
+
+
+
+c5_files <- rownames(cluster_id)[cluster_id == 5]
+
+c5_gt <- read.tree('cluster_5_gt.tree')
+c5_trees <- list()
+for(i in 1:length(c5_files)){
+      print(paste('I am optimising', c5_files[i]))
+      file_temp <- phyDat(read.dna(c5_files[i], format = 'fasta'))
+      c5_trees[[i]] <- optim.pml(pml(tree = c5_gt, data = file_temp), optNni = F, optEdge = T)$tree
+}
+
+names(c5_trees) <- c5_files
+class(c5_trees) <- 'multiPhylo'
+
+write.tree(c5_trees, file = 'c5_optim_trees.trees', tree.names = T)

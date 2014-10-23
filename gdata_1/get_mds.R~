@@ -22,10 +22,10 @@ get_boot_rep <- function(x){
 
 cl <- makeCluster(5)
 registerDoParallel(cl)
-#true_dat_clus <- clus_fun_par(mds_dat, 50)
+true_dat_clus <- clus_fun_par(mds_dat, 50)
 stopCluster(cl)
 
-if(F){
+if(T){
 boot_dat_clus <- list()
 
 cl <- makeCluster(5)
@@ -46,9 +46,6 @@ for(i in 1:length(boot_dat_clus)){
 }
 
 
-
-
-library(rgl)
 
 
 clu1 <- pam(mds_dat, k = 5)

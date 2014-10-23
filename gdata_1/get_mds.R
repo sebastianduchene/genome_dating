@@ -20,7 +20,7 @@ get_boot_rep <- function(x){
 
 ###
 
-cl <- makeCluster(5)
+cl <- makeCluster(10)
 registerDoParallel(cl)
 true_dat_clus <- clus_fun_par(mds_dat, 50)
 stopCluster(cl)
@@ -28,7 +28,7 @@ stopCluster(cl)
 if(T){
 boot_dat_clus <- list()
 
-cl <- makeCluster(5)
+cl <- makeCluster(10)
 registerDoParallel(cl)
 for(i in 1:50){
       print(paste('boot_rep' , i))
@@ -39,10 +39,12 @@ for(i in 1:50){
 
 stopCluster(cl)
 }
-
+dev.new()
 plot(2:50, as.numeric(true_dat_clus), type = 'l', lwd = 2, col = 'red', ylim = c(0.3, 1), ylab = 'Average silhouette width', xlab = 'Number of topology clusters')
 for(i in 1:length(boot_dat_clus)){
-      points(jitter(2:50), as.numeric(boot_dat_clus[[i]]), pch = 20, col = rgb(0, 0, 0.5, 0.2))
+#      points(jitter(2:50), as.numeric(boot_dat_clus[[i]]), pch = 20, col = rgb(0, 0, 0.5, 0.2))
+      points(jitter(2:50), as.numeric(boot_dat_clus[[i]]), pch = 20, col = 1)
+
 }
 
 

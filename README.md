@@ -5,6 +5,26 @@ Updated on: Oct 5 2014
 Sebastian Duchene
 
 
+
+The steps are:
+
+- estimate nj trees
+
+- get dist.topo matrix
+
+- get mds of dist.topo with two dimensions
+
+- choose clusers, concatenate data and estimate the gene trees
+
+- optimise branch lengths on gene trees for each of the chosen clusters
+
+- estimate sbsdmin for each cluster
+
+- choose clusters
+
+This section needs to be updated with the data in gdata4
+
+
 ## Simulate data with 5 topologies (gt) and 3 pacemakers (pm) for each topology
 
 In this simulation the number of genes is 510. Bootstrapping to find the optimal number of clusters from 2:50 is taking 24 seconds with 5 cores.
@@ -63,8 +83,5 @@ The largest cluster is #1, with 120 genes, but it is also the second widest. Thi
    - We can recover the true trees by concatenating the cluster data, or by using the medoid. However concatenating is more reliable. 
 
    **To do**
-   
-   - Select candidate clusters for genome dating
-   
-   - Run clockstar for simulated data on the largest cluster and hte narowest    
-   Plot trees and tree distances
+      
+   - Run clockstar for random data sets with 50 genes
