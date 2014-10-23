@@ -1,6 +1,6 @@
 library(ape)
 
-trees_tr <- read.tree('15_taxa_uniq.tree')
+trees_tr <- read.tree('nj_trees.trees')
 
 topo_mat <- matrix(NA, length(trees_tr), length(trees_tr))
 
