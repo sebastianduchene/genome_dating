@@ -1,7 +1,8 @@
 # UNFINISHED. 
-## INCLUDE PRINTING AND RETURN DATA WITH COHERENT NAMES. 
-## INCLUDE OPTION TO PRINT RESULTS
-## INCLUDE OPTIMAL NUMBER OF CLUSTERS SELECTING WITH GAP 
+## Include gap statistic -- DONE
+## Return optimal number of clusters according to the gap
+## cluster data using pam with optimal k. Save a table with the cluster info and the clustering assignement
+## Include option to plot restults
 
 optim_clusters_topo <- function(topo_mat_file, out_mds_file = 'mds_topo.txt', n_clusters = 2, kmax , b_reps = 100, out_clustering = 'opt_clus.txt', out_clusinfo = 'opt_clusinfo.txt'){
 
@@ -43,38 +44,44 @@ optim_clusters_topo <- function(topo_mat_file, out_mds_file = 'mds_topo.txt', n_
   for(i in 1:b_reps){
       boot_dat_temp <- get_boot_rep(mds_dat)
       boot_dat_clus[[i]] <- clus_fun_par(boot_dat_temp, kmax)
-      cat('bootstrap replicate' , i, 'silhouete width is', mean(boot_dat_clus[[i]]), '\n')
+      cat('bootstrap replicate' , i, 'the average silhouete width is', mean(boot_dat_clus[[i]]), '\n')
 
   }
   stopCluster(cl)
 
-#pdf('topo_clusters.pdf')
-#par(mfrow = c(2, 1))
-#plot(2:50, as.numeric(true_dat_clus), type = 'l', lwd = 2, col = 'red', ylim = c(0.3, 1), ylab = 'Average silhouette width', xlab = 'Number of topology clusters')
-#for(i in 1:length(boot_dat_clus)){
-#      points(jitter(2:50), as.numeric(boot_dat_clus[[i]]), pch = 20, col = rgb(0, 0, 0.5, 0.2))
 
-#}
+  gap_stats <- list()
+  for(i in 1:length(boot_dat_clus)){
+    gap_stats[[i]] <- as.numeric(true_dat_clus) - as.numeric(boot_dat_clus[[i]])
+  }
 
-#clu1 <- pam(mds_dat, k = 5)
 
-#plot(mds_dat, pch = 20, col = clu1$clustering, xlab = 'MDS 1', ylab = 'MDS 2')
+  rec_rbind <- function(list_data){
+    if(length(list_data) == 1) stop('The list has length = 1. Nothing to concatenate')
+    if(length(list_data) == 2){
+      return(rbind(list_data[[1]], list_data[[2]]))
+    }else{
+      return(rbind(list_data[[1]], rec_rbind(list_data[-1])))
+    }
+  }
 
-#dev.off()
 
-  #write.table(t(t(clu1$clustering)), file = out_clustering, row.names = T)
-  #write.table(clu1$clusinfo, file = out_clusinfo, row.names = F)
+  gap_stats <- rec_rbind(gap_stats)
 
-  return(list(as.numeric(true_dat_clus), boot_dat_clus, mds_dat))
+
+
+  return(list(as.numeric(true_dat_clus), boot_dat_clus, mds_dat, gap_stats))
 
 }
 
-#to test:
-#test_1 <- optim_clusters_topo('out_test_1.txt', n_clusters = 5
-, b_reps = 50, kmax = 98)
+test_1 <- optim_clusters_topo('topo_dist_mat.txt', n_clusters = 5, kmax = 50, b_reps = 100)
 
-#plot(2:98, test_1[[1]], type = 'l', ylim = c(0.2, 0.7))
-#for(i in 1:length(test_1[[2]])){
-#  points(2:98, test_1[[2]][[i]], col = rgb(0, 0, 0.5, 0.3))
+
+#plot(2:(length(gap_stats[[1]]) + 1), gap_stats[[1]], ylim = c(0, 0.8))
+#for(i in 2:length(gap_stats)){
+#      points(jitter(2:(length(gap_stats[[1]]) + 1)), gap_stats[[i]])
 #}
+
+
+
 
