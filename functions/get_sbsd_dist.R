@@ -1,7 +1,7 @@
 library(ape)
 
 
-c5_trees <- read.tree('nj_trees.trees')
+#c5_trees <- read.tree('nj_trees.trees')
 get_sbsd_dist <-  function(tree_file_name, out_file_name = 'out_sbsd_dist.txt',  n_clusters = 2){
   
   require(doParallel)
@@ -92,5 +92,5 @@ get_sbsd_dist <-  function(tree_file_name, out_file_name = 'out_sbsd_dist.txt', 
 
 #sbsd_1 <- sbsdmin_mat(c1_trees, 5)
 #write.table(sbsd_1, file = 'sbsd_c1.txt', row.names = T, col.names = T)
-sbsd_5 <- get_sbsd_dist('twenty.trees', n_clusters = 4)
+#sbsd_5 <- get_sbsd_dist('twenty.trees', n_clusters = 4)
 #write.table(sbsd_5, file = 'sbsd.txt', row.names = T, col.names = T)
