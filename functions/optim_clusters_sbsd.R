@@ -27,7 +27,6 @@ optim_clusters_sbsd <- function(sbsd_mat_file, out_mds_file = 'mds_sbsd.txt', n_
     kmax = round(nrow(mds_dat) / 2, 0)
   }
 
-
   cl <- makeCluster(n_clusters)
   registerDoParallel(cl)
   true_dat_clus <- clus_fun_par(mds_dat, kmax)
@@ -64,13 +63,21 @@ optim_clusters_sbsd <- function(sbsd_mat_file, out_mds_file = 'mds_sbsd.txt', n_
   gap_stats <- rec_rbind(gap_stats)
   mean_gaps <- sapply(1:ncol(gap_stats), function(x) mean(gap_stats[, x]))
   ci_gaps <- sapply(1:ncol(gap_stats), function(x) sd(gap_stats[, x]) / sqrt(nrow(gap_stats)))
+  high_gaps <- sapply(1:ncol(gap_stats), function(x) quantile(gap_stats[, x], c(0.975)))
   max_gap <- which.max(mean_gaps)
 
-  if(mean_gaps[max_gap] > mean_gaps[max_gap - 1] + (1.96 * ci_gaps[max_gap - 1]) & mean_gaps[max_gap] > mean_gaps[max_gap + 1] + (1.96 * ci_gaps[max_gap +1])){
-    opt_k <- max_gap + 1
-    cluster_pam <- pam(mds_dat, k = opt_k)
-    clus_info  <- cluster_pam$clusinfo
-    clus_id <- cluster_pam$clustering
+  if(max_gap > 1){
+    if(mean_gaps[max_gap] > high_gaps[max_gap - 1] & mean_gaps[max_gap] > high_gaps[max_gap + 1]){
+      opt_k <- max_gap + 1
+      cluster_pam <- pam(mds_dat, k = opt_k)
+      clus_info  <- cluster_pam$clusinfo
+      clus_id <- cluster_pam$clustering
+    }else{
+      opt_k <- 1
+      clus_info <- rep(NA, 5)
+      clus_id <- rep(1, nrow(mds_dat))
+      names(clus_id) <- rownames(mds_dat)
+     }
   }else{
     opt_k <- 1
     clus_info <- rep(NA, 5)
@@ -91,11 +98,12 @@ optim_clusters_sbsd <- function(sbsd_mat_file, out_mds_file = 'mds_sbsd.txt', n_
   write.table(clus_id, file = out_cluster_id)
   write.table(clus_info, file = out_cluster_info)
 
-  return(list(optimal_k = opt_k, cluster_info = clus_info, cluster_id =  clus_id, gap_statistics = gap_stats, mds = mds_dat))
+  return(list(high_gaps = high_gaps, optimal_k = opt_k, cluster_info = clus_info, cluster_id =  clus_id, gap_statistics = gap_stats, mds = mds_dat))
 }
 
-test_1 <- optim_clusters_sbsd('sbsd_c1.txt', n_clusters = 2, kmax = 20, b_reps = 50, plot_clustering = T)
+test_1 <- optim_clusters_sbsd('sbsd_c1.txt', n_clusters = 2, kmax = 10, b_reps = 50, plot_clustering = T)
 
+test_1$gap_statistics 
 
 
 
