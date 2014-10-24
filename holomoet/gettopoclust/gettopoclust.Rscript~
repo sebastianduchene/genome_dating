@@ -1,0 +1,4 @@
+library(phangorn)
+source("~/Desktop/sandbox/genome_dating/functions/optim_clusters_topo.R")
+
+optim_clusters_topo("../topo_dist_mat.R", n_clusters = 5)

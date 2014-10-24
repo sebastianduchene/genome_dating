@@ -65,12 +65,21 @@ optim_clusters_topo <- function(topo_mat_file, out_mds_file = 'mds_topo.txt', n_
   mean_gaps <- sapply(1:ncol(gap_stats), function(x) mean(gap_stats[, x]))
   ci_gaps <- sapply(1:ncol(gap_stats), function(x) sd(gap_stats[, x]) / sqrt(nrow(gap_stats)))
   max_gap <- which.max(mean_gaps)
+  high_gaps <- sapply(1:ncol(gap_stats), function(x) quantile(gap_stats[, x], c(0.975)))
+  max_gap <- which.max(mean_gaps)
 
-  if(mean_gaps[max_gap] > mean_gaps[max_gap - 1] + (1.96 * ci_gaps[max_gap - 1]) & mean_gaps[max_gap] > mean_gaps[max_gap + 1] + (1.96 * ci_gaps[max_gap +1])){
-    opt_k <- max_gap + 1
-    cluster_pam <- pam(mds_dat, k = opt_k)
-    clus_info  <- cluster_pam$clusinfo
-    clus_id <- cluster_pam$clustering
+  if(max_gap > 1){
+    if(mean_gaps[max_gap] > high_gaps[max_gap - 1] & mean_gaps[max_gap] > high_gaps[max_gap + 1]){
+      opt_k <- max_gap + 1
+      cluster_pam <- pam(mds_dat, k = opt_k)
+      clus_info  <- cluster_pam$clusinfo
+      clus_id <- cluster_pam$clustering
+    }else{
+      opt_k <- 1
+      clus_info <- rep(NA, 5)
+      clus_id <- rep(1, nrow(mds_dat))
+      names(clus_id) <- rownames(mds_dat)
+     }
   }else{
     opt_k <- 1
     clus_info <- rep(NA, 5)
