@@ -20,7 +20,7 @@ optim_clusters_sbsd <- function(sbsd_mat_file, out_mds_file = 'mds_sbsd.txt', n_
   clus_fun_par <- function(x, kmax) foreach(i = 2:(kmax), .combine = cbind) %dopar% cluster::clara(x, k = i)$silinfo$avg.width
 
   get_boot_rep <- function(x){
-    boot_mat <- cbind(runif(nrow(x), min(x[, 1]), max(x[, 1])), runif(nrow(x), min(x[, 2]), max(x[, 2])))
+    boot_mat <- cbind(runif(nrow(x), min(x[, 1]), max(x[, 1])), runif(nrow(x), min(x[, 2]), max(x[, 2])), runif(nrow(x), min(x[, 3]), max(x[, 3])))
   }
 
   if(missing(kmax)){
@@ -101,7 +101,7 @@ optim_clusters_sbsd <- function(sbsd_mat_file, out_mds_file = 'mds_sbsd.txt', n_
   return(list(optimal_k = opt_k, cluster_info = clus_info, cluster_id =  clus_id, gap_statistics = gap_stats, mds = mds_dat))
 }
 
-#test_1 <- optim_clusters_sbsd('sbsd_c1.txt', n_clusters = 2, kmax = 10, b_reps = 50, plot_clustering = T)
+test_1 <- optim_clusters_sbsd('sbsd_c1.txt', n_clusters = 2, kmax = 10, b_reps = 50, plot_clustering = T)
 
 
 
