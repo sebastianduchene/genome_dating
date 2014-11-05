@@ -1,14 +1,6 @@
 library(ape)
 library(cluster)
 
-# example:
-# tree_length_info('tree_file.txt', 'mds_dists.txt')
-# The parameter are:
-# optim_trees: trees with the same topology and branch lengths optimised. They should have names.
-# mds_sbsdmin: MDS of the sbsdmin distances
-# k_set: The number of clock clusters/ pacemakers
-# tl_class: The number of tree length classes to use
-
 tree_length_info <- function(optim_trees, mds_sbsdmin, k_set = 10, tl_class = 10, clustering_info_name = 'clus_info.txt', tree_info_name = 'tree_info.txt'){
   require(ape)
   require(cluster)		 

@@ -9,6 +9,7 @@ library(cluster)
 # k_set: The number of clock clusters/ pacemakers
 # tl_class: The number of tree length classes to use
 
+
 tree_length_info <- function(optim_trees, mds_sbsdmin, k_set = 10, tl_class = 10, clustering_info_name = 'clus_info.txt', tree_info_name = 'tree_info.txt'){
   require(ape)
   require(cluster)		 
@@ -20,8 +21,8 @@ tree_length_info <- function(optim_trees, mds_sbsdmin, k_set = 10, tl_class = 10
 
   tr_lens_sorted <- sort(sapply(all_trees, function(x) sum(x$edge.length)), dec = T)
 
-  tree_sets <- seq(from = 1, to = length(tr_lens), by = n_p_groups)
-  if(!(length(tr_lens) %in% tree_sets)) tree_sets <- c(tree_sets, length(all_trees))
+  tree_sets <- seq(from = 1, to = length(tr_lens_sorted), by = n_p_groups)
+  if(!(length(tr_lens_sorted) %in% tree_sets)) tree_sets <- c(tree_sets, length(all_trees))
 
   tree_set_list <- list()
   for(i in 1:(length(tree_sets) -1)){
