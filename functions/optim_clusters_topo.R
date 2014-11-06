@@ -87,7 +87,7 @@ optim_clusters_topo <- function(topo_mat_file, out_mds_file = 'mds_topo.txt', n_
     clus_info <- rep(NA, 5)
     clus_id <- rep(1, nrow(mds_dat))
     names(clus_id) <- rownames(mds_dat)
-#  }
+  }
 
   if(plot_clustering){
     par(mfrow = c(2, 1))
