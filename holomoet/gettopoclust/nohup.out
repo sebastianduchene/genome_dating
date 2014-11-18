@@ -1,0 +1,22 @@
+Loading required package: ape
+
+Attaching package: 'phangorn'
+
+The following object is masked from 'package:ape':
+
+    as.prop.part
+
+Loading required package: cluster
+Loading required package: doParallel
+Loading required package: foreach
+Loading required package: iterators
+Loading required package: parallel
+bootstrap replicate 1 the average silhouete width is 0.389107 
+bootstrap replicate 2 the average silhouete width is 0.3874617 
+bootstrap replicate 3 the average silhouete width is 0.3823275 
+bootstrap replicate 4 the average silhouete width is 0.3702788 
+bootstrap replicate 5 the average silhouete width is 0.3783342 
+bootstrap replicate 6 the average silhouete width is 0.3849179 
+Error in unserialize(socklist[[n]]) : error reading from connection
+Calls: optim_clusters_topo ... recvOneData -> recvOneData.SOCKcluster -> unserialize
+Execution halted

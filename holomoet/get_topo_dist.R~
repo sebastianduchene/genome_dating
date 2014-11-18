@@ -1,10 +1,14 @@
 library(ape)
 
 <<<<<<< HEAD
+trees_tr <- read.tree('nj_trees.trees')
+=======
+<<<<<<< HEAD
 trees_tr <- read.tree('15_taxa_uniq.tree')
 =======
 trees_tr <- read.tree('nj_trees.trees')
 >>>>>>> ef4924cf913570229cd3556c23369f2003c9d272
+>>>>>>> ec58e69eb8e7bba02e389a9cebb2951088f65a8c
 
 topo_mat <- matrix(NA, length(trees_tr), length(trees_tr))
 
