@@ -1,10 +1,6 @@
-# UNFINISHED. 
-## Include gap statistic -- DONE
-## Return optimal number of clusters according to the gap
-## cluster data using pam with optimal k. Save a table with the cluster info and the clustering assignement
-## Include option to plot restults
+# COMPLETED. Add instructions
 
-optim_clusters_topo <- function(topo_mat_file, out_mds_file = 'mds_topo.txt', n_clusters = 2, kmax , b_reps = 100, out_clustering = 'opt_clus.txt', out_clusinfo = 'opt_clusinfo.txt'){
+optim_clusters_topo <- function(topo_mat_file, out_mds_file = 'mds_topo.txt', n_clusters = 2, kmax , b_reps = 100, out_cluster_id = 'opt_clus_id.txt', out_clus_info = 'opt_clusinfo.txt', plot_clustering = F){
 
   require(cluster)
   require(ape)
@@ -65,22 +61,40 @@ optim_clusters_topo <- function(topo_mat_file, out_mds_file = 'mds_topo.txt', n_
     }
   }
 
-
   gap_stats <- rec_rbind(gap_stats)
+  mean_gaps <- sapply(1:ncol(gap_stats), function(x) mean(gap_stats[, x]))
+  ci_gaps <- sapply(1:ncol(gap_stats), function(x) sd(gap_stats[, x]) / sqrt(nrow(gap_stats)))
+  max_gap <- which.max(mean_gaps)
 
+  if(mean_gaps[max_gap] > mean_gaps[max_gap - 1] + (1.96 * ci_gaps[max_gap - 1]) & mean_gaps[max_gap] > mean_gaps[max_gap + 1] + (1.96 * ci_gaps[max_gap +1])){
+    opt_k <- max_gap + 1
+    cluster_pam <- pam(mds_dat, k = opt_k)
+    clus_info  <- cluster_pam$clusinfo
+    clus_id <- cluster_pam$clustering
+  }else{
+    opt_k <- 1
+    clus_info <- rep(NA, 5)
+    clus_id <- rep(1, nrow(mds_dat))
+    names(clus_id) <- rownames(mds_dat)
+  }
 
+  if(plot_clustering){
+    par(mfrow = c(2, 1))
+    plot(2:(ncol(gap_stats) + 1), gap_stats[1, ], pch = 20, col = rgb(0, 0, 1, 0.3), ylim = c(min(gap_stats), max(gap_stats)), ylab = 'Gap', xlab = 'k')
+    for(i in 2:nrow(gap_stats)){
+      points(jitter(2:(ncol(gap_stats) + 1)), gap_stats[i, ], pch = 20, col = rgb(0, 0, 1, 0.5))
+    }
+    lines(2:(ncol(gap_stats) + 1), mean_gaps, col = 'red', lwd = 2)
+    plot(mds_dat, pch = 20, col = clus_id, ylab = 'MDS coordinate 2', xlab = 'MDS coordinate 1', main = paste('MDS plot for k =', opt_k))
+  }
 
-  return(list(as.numeric(true_dat_clus), boot_dat_clus, mds_dat, gap_stats))
+  write.table(clus_id, file = out_cluster_id)
+  write.table(clus_info, file = out_clus_info)
 
+  return(list(optimal_k = opt_k, cluster_info = clus_info, cluster_id =  clus_id, gap_statistics = gap_stats, mds = mds_dat))
 }
 
-test_1 <- optim_clusters_topo('topo_dist_mat.txt', n_clusters = 5, kmax = 50, b_reps = 100)
-
-
-#plot(2:(length(gap_stats[[1]]) + 1), gap_stats[[1]], ylim = c(0, 0.8))
-#for(i in 2:length(gap_stats)){
-#      points(jitter(2:(length(gap_stats[[1]]) + 1)), gap_stats[[i]])
-#}
+#test_1 <- optim_clusters_topo('topo_dist_mat.txt', n_clusters = 2, kmax = 20, b_reps = 50, plot_clustering = T)
 
 
 

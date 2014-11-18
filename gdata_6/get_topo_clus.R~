@@ -1,0 +1,5 @@
+
+for(i in dir('../functions/', pattern = 'R$')){
+  source(paste('../functions/', i))
+
+}
